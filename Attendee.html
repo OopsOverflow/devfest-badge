@@ -15,10 +15,6 @@
         body {
         font-family: 'Google Sans', Arial, sans-serif;
         }
-        /* Style for the file input */
-        input[type="file"]::file-selector-button {
-            @apply bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600 transition-colors;
-        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen p-4 md:p-8">
@@ -29,13 +25,20 @@
                 <div class="flex flex-col gap-6 order-2 md:order-1">                
                     <h1 class="text-3xl font-bold text-gray-800 order-2 md:order-1">Customize Your Badge</h1>
                     <p class="text-gray-600 order-3 md:order-2">
-                        Fill in your details and upload a photo.
+                        Fill in your details and upload a photo (we don't store any data).
                 </p>
 
                 <div class="space-y-4 order-4 md:order-3">
-                        <div>
-                        <label for="photoUpload" class="block text-sm font-medium text-gray-700 mb-1">Upload Your Photo</label>
-                        <input type="file" id="photoUpload" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:border-0">
+                    <div>
+                        <label for="photoUpload" class="w-full inline-flex items-center justify-center px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg cursor-pointer hover:bg-blue-600 transition-colors shadow">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                            </svg>
+                            <span id="file-chosen-text">Upload Your Photo</span>
+                        </label>
+                        
+                        <input type="file" id="photoUpload" accept="image/*" class="hidden">
+                        
                         <p id="dragHint" class="text-sm p-2 bg-blue-100 text-blue-800 font-medium rounded-md mt-2 hidden">
                             Click and drag your photo in the preview to reposition it.
                         </p>
@@ -81,7 +84,7 @@
             // Wait for the specific fonts and weights we use to be ready
             // This must happen BEFORE any canvas drawing.
 
-            await document.fonts.load('300 42px "Google Sans"'); // semibold
+            await document.fonts.load('450 45px "Google Sans"'); // semibold
             await document.fonts.load('bold 32px Roboto, "Google Sans"'); // For Title and Username
             await document.fonts.load('bold 32px Roboto, "Google Sans"'); // For Company
 
@@ -170,17 +173,18 @@
             // 3. Draw the text
             // Set styles for Name
             ctx.fillStyle = '#757577'; // Dark gray for names too
-ctx.font = '300 42px "Google Sans"';            ctx.fillText(textData.firstName, 80, 510);
-            ctx.fillText(textData.lastName, 80, 580);
+            ctx.font = '450 45px "Google Sans"';            
+            ctx.fillText(textData.firstName, 90, 510);
+            ctx.fillText(textData.lastName, 90, 580);
 
             // Set styles for Optional Info
             ctx.fillStyle = '#757577'; // Medium gray
             ctx.font = '32px Roboto, "Google Sans"';
-            ctx.fillText(textData.title, 80, 650);
+            ctx.fillText(textData.title, 90, 650);
             ctx.font = 'bold 32px Roboto, "Google Sans"';
-            ctx.fillText(textData.company, 80, 700);
+            ctx.fillText(textData.company, 90, 700);
             ctx.font = '32px Roboto, "Google Sans"';
-            ctx.fillText(textData.username, 80, 800);
+            ctx.fillText(textData.username, 90, 800);
         }
 
         // --- Event Listeners ---
